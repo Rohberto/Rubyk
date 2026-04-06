@@ -90,7 +90,7 @@ export const metrics = [
 ]
 
 export const CALENDLY_URL  = 'https://calendly.com/victory-rubyk'
-export const SUBSTACK_HANDLE = 'rubyk'
+export const SUBSTACK_HANDLE = 'rubykco'
 export const EMAIL = 'hello@rubyk.co'
 export const INSTAGRAM_URL = 'https://www.instagram.com/rubykcreatives'
 export const LINKEDIN_URL  = 'https://www.linkedin.com/company/rubykco/'

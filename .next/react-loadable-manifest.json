@@ -1,4 +1,28 @@
 {
+  "components/About.tsx -> gsap": {
+    "id": "components/About.tsx -> gsap",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_index_js.js"
+    ]
+  },
+  "components/About.tsx -> gsap/ScrollTrigger": {
+    "id": "components/About.tsx -> gsap/ScrollTrigger",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
+    ]
+  },
+  "components/CTA.tsx -> gsap": {
+    "id": "components/CTA.tsx -> gsap",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_index_js.js"
+    ]
+  },
+  "components/CTA.tsx -> gsap/ScrollTrigger": {
+    "id": "components/CTA.tsx -> gsap/ScrollTrigger",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
+    ]
+  },
   "components/CaseStudies.tsx -> gsap": {
     "id": "components/CaseStudies.tsx -> gsap",
     "files": [
@@ -19,6 +43,30 @@
   },
   "components/Services.tsx -> gsap/ScrollTrigger": {
     "id": "components/Services.tsx -> gsap/ScrollTrigger",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
+    ]
+  },
+  "components/SubstackClient.tsx -> gsap": {
+    "id": "components/SubstackClient.tsx -> gsap",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_index_js.js"
+    ]
+  },
+  "components/SubstackClient.tsx -> gsap/ScrollTrigger": {
+    "id": "components/SubstackClient.tsx -> gsap/ScrollTrigger",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
+    ]
+  },
+  "components/Testimonials.tsx -> gsap": {
+    "id": "components/Testimonials.tsx -> gsap",
+    "files": [
+      "static/chunks/_app-pages-browser_node_modules_gsap_index_js.js"
+    ]
+  },
+  "components/Testimonials.tsx -> gsap/ScrollTrigger": {
+    "id": "components/Testimonials.tsx -> gsap/ScrollTrigger",
     "files": [
       "static/chunks/_app-pages-browser_node_modules_gsap_ScrollTrigger_js.js"
     ]

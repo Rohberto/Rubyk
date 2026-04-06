@@ -6,9 +6,38 @@ import SectionLabel from './ui/SectionLabel'
 import MagneticButton from './ui/MagneticButton'
 import { services, CALENDLY_URL } from '@/data/content'
 
+const STYLES = `
+  .services-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .services-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(14px, 2vw, 20px);
+  }
+  @media (min-width: 1024px) {
+    .services-layout { grid-template-columns: 340px 1fr; }
+    .services-cards  { grid-template-columns: 1fr 1fr; }
+  }
+  .svc-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .svc-card:hover::after { transform: scaleX(1); }
+`
+
 export default function Services() {
-  const sectionRef = useRef(null)
-  const leftRef    = useRef(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const leftRef    = useRef<HTMLDivElement>(null)
   const cardsRef   = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -19,36 +48,20 @@ export default function Services() {
       gsap.registerPlugin(ScrollTrigger)
 
       ctx = gsap.context(() => {
-        // Left column slides up on scroll
-        gsap.fromTo(
-          leftRef.current,
-          { opacity: 0, y: 36 },
-          {
-            opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-            scrollTrigger: {
-              trigger: leftRef.current,
-              start: 'top 65%',
-              once: true,
-            },
-          }
-        )
-
-        // Cards stagger in on scroll
+        gsap.set(leftRef.current, { opacity: 0, y: 36 })
         const cards = cardsRef.current?.querySelectorAll('.svc-card')
+        if (cards?.length) gsap.set(cards, { opacity: 0, y: 48 })
+
+        gsap.to(leftRef.current, {
+          opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: leftRef.current, start: 'top 65%', once: true },
+        })
+
         if (cards?.length) {
-          gsap.fromTo(
-            cards,
-            { opacity: 0, y: 48 },
-            {
-              opacity: 1, y: 0, duration: 0.75, ease: 'power3.out',
-              stagger: 0.3,
-              scrollTrigger: {
-                trigger: cardsRef.current,
-                start: 'top 65%',
-                once: true,
-              },
-            }
-          )
+          gsap.to(cards, {
+            opacity: 1, y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.1,
+            scrollTrigger: { trigger: cardsRef.current, start: 'top 65%', once: true },
+          })
         }
       }, sectionRef)
     })()
@@ -58,54 +71,16 @@ export default function Services() {
 
   return (
     <>
-      <style>{`
-        .services-layout {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: clamp(40px, 6vw, 80px);
-          align-items: start;
-        }
-        .services-cards {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: clamp(14px, 2vw, 20px);
-        }
-        @media (min-width: 1024px) {
-          .services-layout {
-            grid-template-columns: 340px 1fr;
-          }
-          .services-cards {
-            grid-template-columns: 1fr 1fr;
-          }
-        }
-        .svc-card {
-          opacity: 0;
-        }
-        .svc-card::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 3px;
-          background: var(--orange);
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .svc-card:hover::after {
-          transform: scaleX(1);
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
       <section id="services" ref={sectionRef} style={{
         padding: 'clamp(64px, 8vw, 120px) clamp(20px, 7vw, 96px)',
         background: 'var(--cream)',
       }}>
-        <div className="grid-sidebar services-layout">
+        <div className="services-layout">
 
           {/* Left column */}
-          <div ref={leftRef} style={{ opacity: 0 }}>
+          <div ref={leftRef}>
             <SectionLabel>What we do</SectionLabel>
             <h2 style={{
               fontFamily: 'var(--font-cormorant), Georgia, serif',

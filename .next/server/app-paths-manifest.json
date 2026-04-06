@@ -1,4 +1,4 @@
 {
   "/page": "app/page.js",
-  "/api/substack/route": "app/api/substack/route.js"
+  "/blog/page": "app/blog/page.js"
 }

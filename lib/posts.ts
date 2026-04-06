@@ -3,17 +3,10 @@ import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
+import type { Post } from './post-types'
 
-export interface Post {
-  slug:     string
-  title:    string
-  date:     string
-  excerpt:  string
-  author:   string
-  tags:     string[]
-  readTime: string
-  content?: string
-}
+export type { Post } from './post-types'
+export { formatPostDate } from './post-types'
 
 const postsDir = path.join(process.cwd(), 'posts')
 
@@ -58,15 +51,5 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     }
   } catch {
     return null
-  }
-}
-
-export function formatPostDate(dateStr: string): string {
-  try {
-    return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(
-      new Date(dateStr),
-    )
-  } catch {
-    return dateStr
   }
 }
