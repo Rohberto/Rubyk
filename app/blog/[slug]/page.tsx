@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getAllPosts, getPostBySlug, formatPostDate } from '@/lib/posts'
+import { getAllPosts, getPostBySlug } from '@/lib/posts'
+import { formatPostDate } from '@/lib/post-types'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
@@ -46,6 +47,7 @@ export default async function PostPage({ params }: Props) {
           {/* Back link */}
           <Link
             href="/blog"
+            className="back-link"
             style={{
               display:        'inline-flex',
               alignItems:     'center',
@@ -56,8 +58,6 @@ export default async function PostPage({ params }: Props) {
               marginBottom:   28,
               transition:     'color 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--orange)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted-text)')}
           >
             ← All posts
           </Link>
@@ -65,7 +65,7 @@ export default async function PostPage({ params }: Props) {
           {/* Tags */}
           {post.tags.length > 0 && (
             <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
-              {post.tags.map((tag) => (
+              {post.tags.map((tag: string) => (
                 <span
                   key={tag}
                   style={{
