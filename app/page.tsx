@@ -8,6 +8,7 @@ import SubstackSection from '@/components/SubstackSection'
 import About           from '@/components/About'
 import CTA             from '@/components/CTA'
 import Footer          from '@/components/Footer'
+import GuideBanner from '@/components/GuideBanner'
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <Services />
         <CaseStudies />
         <Testimonials />
+        <GuideBanner />
         <SubstackSection />
         <About />
         <CTA />

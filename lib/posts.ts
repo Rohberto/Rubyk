@@ -3,10 +3,11 @@ import path from 'path'
 import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
-import type { Post } from './post-types'
 
 export type { Post } from './post-types'
 export { formatPostDate } from './post-types'
+
+import type { Post } from './post-types'
 
 const postsDir = path.join(process.cwd(), 'posts')
 

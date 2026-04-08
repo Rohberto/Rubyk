@@ -304,12 +304,6 @@ export default function About() {
               </div>
             </div>
 
-            <div ref={circleRef} className="connector-circle">
-              <span style={{
-                fontFamily: 'var(--font-cormorant), Georgia, serif',
-                fontSize: 22, fontWeight: 700, color: '#fff', letterSpacing: '-1px',
-              }}>R</span>
-            </div>
           </div>
         </div>
       </section>
