@@ -39,7 +39,7 @@ export default function Navbar() {
   const Logo = () => (
     <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
       <img
-        src={LOGO_URL}
+        src='/rubyk.png'
         alt="Rubyk"
         style={{ height: 28 }}
         onError={(e) => {

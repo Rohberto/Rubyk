@@ -240,8 +240,8 @@ export default function About() {
               fontSize: 'clamp(28px, 3.5vw, 48px)', fontWeight: 600,
               color: 'var(--dark)', letterSpacing: '-1px', lineHeight: 1.12, marginBottom: 20,
             }}>
-              Two people who've been doing this separately for years
-            </h2>
+            Two founders brought together by one problem.
+ </h2>
             <p style={{
               fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
               lineHeight: 1.82, marginBottom: 16,

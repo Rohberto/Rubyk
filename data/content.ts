@@ -9,7 +9,7 @@ export const services = [
     num: '02',
     title: 'Fundraising & Investor Storytelling',
     desc: 'Tell a story investors can believe in — and act on.',
-    tags: ['Pitch Decks', 'Financial Models', 'One-pagers'],
+    tags: ['Pitch Decks', 'Financial Models', 'Investor Materials'],
   },
   {
     num: '03',
@@ -21,7 +21,7 @@ export const services = [
     num: '04',
     title: 'Brand, Design & Conversion',
     desc: 'Make the story work in the real world. Identity that converts, not just impresses.',
-    tags: ['Visual Identity', 'Websites', 'Presentations'],
+    tags: ['Visual Identity', 'Websites', 'Landing Pages'],
   },
 ]
 
@@ -49,18 +49,18 @@ export const caseStudies = [
 export const testimonials = [
   {
     quote:
-      'Rubyk didn\'t just fix our deck — they helped us understand what we were actually building. The clarity we got from that process changed how we pitch everything.',
-    name: 'Amara Okafor',
-    role: 'Co-founder, Fintelo · Lagos',
-    initials: 'AO',
+      'It was a good decision to engage Andrew. The expertise and attention to detail were evident in the pitch deck and business model. There was a clear commitment to excellence-',
+    name: 'Aniekan Alexis Udofai',
+    role: 'Founder Bellevolt',
+    initials: 'AAU',
     img: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
   {
     quote:
-      'I\'d been trying to write the same investor email for three weeks. Victory got on a call, figured out what I was really trying to say, and we had it done in a day.',
-    name: 'Kofi Mensah',
-    role: 'Founder, SolarPath · Accra',
-    initials: 'KM',
+      'Victory finds it easy to transform data into compelling business narratives, applying a lot of critical thinking in the process. It’s rare to find that blend of clear storytelling and deep analysis, but Victory brings both.',
+    name: 'Didi',
+    role: 'VP Comms, Moniepoint · Lagos',
+    initials: '',
     img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
   {
@@ -84,14 +84,14 @@ export const sectors = [
 ]
 
 export const metrics = [
-  { val: '$2.4M+', label: 'Capital raised by clients' },
   { val: '7+',     label: 'Industries served' },
-  { val: '5 yrs',  label: 'Combined experience' },
+  { val: '11+ yrs',  label: 'Combined experience' },
+  { val: '48hr',  label: 'Proposal turnaround' },
 ]
 
 export const CALENDLY_URL  = 'https://calendly.com/victory-rubyk'
 export const SUBSTACK_HANDLE = 'rubykco'
 export const EMAIL = 'hello@rubyk.co'
-export const INSTAGRAM_URL = 'https://www.instagram.com/rubykcreatives'
+export const INSTAGRAM_URL = 'https://www.instagram.com/rubyk.co'
 export const LINKEDIN_URL  = 'https://www.linkedin.com/company/rubykco/'
 export const LOGO_URL      = 'https://rubyk.co/wp-content/uploads/2026/03/Rubyk-website-logo-scaled.png'

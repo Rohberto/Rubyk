@@ -87,14 +87,14 @@ export default function Services() {
               fontSize: 'clamp(30px, 3.5vw, 50px)', fontWeight: 600,
               color: 'var(--dark)', letterSpacing: '-1px', lineHeight: 1.12, marginBottom: 16,
             }}>
-              Everything your story needs to land
+             Turning your ideas into stories that land
             </h2>
             <p style={{
               fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
               lineHeight: 1.8, marginBottom: 32,
             }}>
-              From the first conversation to your final deck, we build the narrative
-              infrastructure that lets founders grow with confidence.
+              We help founders find their voice and tell the story that gets them heard.
+
             </p>
             <MagneticButton href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
               Not sure where to start? Let's talk →

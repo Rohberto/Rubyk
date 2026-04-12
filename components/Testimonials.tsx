@@ -177,19 +177,8 @@ export default function Testimonials() {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
                 <div className="testi-avatar-wrap">
-                  <img
-                    src={t.img} alt={t.name} width={52} height={52}
-                    style={{
-                      width: 52, height: 52, borderRadius: '50%', objectFit: 'cover',
-                      border: '2px solid rgba(232,99,42,0.2)', display: 'block',
-                    }}
-                    onError={(e) => {
-                      const img = e.currentTarget
-                      img.style.display = 'none'
-                      const fb = img.nextElementSibling as HTMLElement
-                      if (fb) fb.style.display = 'flex'
-                    }}
-                  />
+                 
+                 
                   <div style={{
                     display: 'none', width: 52, height: 52, borderRadius: '50%',
                     background: 'var(--orange-pale)', border: '1px solid rgba(232,99,42,0.2)',

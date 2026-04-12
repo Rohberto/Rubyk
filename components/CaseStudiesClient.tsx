@@ -168,7 +168,7 @@ export default function CaseStudiesClient({ items }: { items: CaseItem[] }) {
         {/* Header */}
         <div ref={headerRef} className="grid-2 case-header" style={{ alignItems: 'end', marginBottom: 52 }}>
           <div>
-            <SectionLabel light>Latest writing</SectionLabel>
+            <SectionLabel light>Case Studies</SectionLabel>
             <h2 style={{
               fontFamily: 'var(--font-cormorant), Georgia, serif',
               fontSize: 'clamp(30px, 3.5vw, 54px)', fontWeight: 600,
@@ -178,7 +178,8 @@ export default function CaseStudiesClient({ items }: { items: CaseItem[] }) {
             </h2>
           </div>
           <p style={{ fontSize: 16, fontWeight: 300, color: 'rgba(253,250,246,0.48)', lineHeight: 1.8 }}>
-            Every founder's story is different. Here's what we've been writing about lately.
+            Every founder's story is different. Here's how we’ve helped a few of them shine through.
+
           </p>
         </div>
 

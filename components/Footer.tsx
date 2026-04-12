@@ -7,8 +7,7 @@ const navLinks = [
   { label: 'Work',     href: '/#work' },
   { label: 'About',   href: '/#about' },
   { label: 'Blog',    href: '/blog' },
-  { label: 'Contact', href: '/#contact' },
-  { label: 'Terms',   href: 'https://rubyk.co/terms-and-conditions/', external: true },
+  { label: 'Contact', href: 'mailto:hello@rubyk.co?subject=Let%27s%20work%20together&body=Hi%20Rubyk%2C%0A%0AI%27d%20love%20to%20chat%20about...', external: true },
 ]
 
 export default function Footer() {
@@ -16,14 +15,14 @@ export default function Footer() {
     <footer style={{
       background: 'var(--black)',
       padding: 'clamp(24px, 3vw, 40px) clamp(20px, 7vw, 96px)',
-      borderTop: '1px solid rgba(255,255,255,0.04)',
+      borderTop: '1px solid rgba(255,255,255,0.08)',
     }}>
       <div className="footer-inner">
 
         {/* Logo */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
-            src={LOGO_URL} alt="Rubyk" style={{ height: 24 }}
+            src='/rubyk.png' alt="Rubyk" style={{ height: 24 }}
             onError={(e) => {
               const img = e.currentTarget
               img.style.display = 'none'
@@ -39,7 +38,7 @@ export default function Footer() {
           }}>Rubyk</span>
         </div>
 
-        {/* Nav links — no event handlers, CSS hover via .footer-link */}
+        {/* Nav links */}
         <div style={{ display: 'flex', gap: '14px 24px', flexWrap: 'wrap', alignItems: 'center' }}>
           {navLinks.map((l) => (
             <Link
@@ -49,7 +48,7 @@ export default function Footer() {
               target={l.external ? '_blank' : undefined}
               rel={l.external ? 'noopener noreferrer' : undefined}
               style={{
-                fontSize: 13, color: 'rgba(255,255,255,0.32)',
+                fontSize: 13, color: 'rgba(255,255,255,0.65)',
                 textDecoration: 'none', transition: 'color 0.2s',
               }}
             >
@@ -60,23 +59,23 @@ export default function Footer() {
 
         {/* Copyright + socials */}
         <div style={{
-          fontSize: 12, color: 'rgba(255,255,255,0.2)',
+          fontSize: 12, color: 'rgba(255,255,255,0.45)',
           display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap',
         }}>
           <span>© 2026 Rubyk Co.</span>
           <span>·</span>
           <a href={`mailto:${EMAIL}`} className="footer-link"
-            style={{ color: 'rgba(255,255,255,0.2)', textDecoration: 'none', transition: 'color 0.2s' }}
+            style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none', transition: 'color 0.2s' }}
           >{EMAIL}</a>
           <span>·</span>
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"
             className="footer-social"
-            style={{ color: 'rgba(255,255,255,0.2)', textDecoration: 'none', transition: 'color 0.2s' }}
+            style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none', transition: 'color 0.2s' }}
           >Instagram</a>
           <span>·</span>
           <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"
             className="footer-social"
-            style={{ color: 'rgba(255,255,255,0.2)', textDecoration: 'none', transition: 'color 0.2s' }}
+            style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none', transition: 'color 0.2s' }}
           >LinkedIn</a>
         </div>
       </div>

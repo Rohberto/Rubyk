@@ -211,7 +211,8 @@ export default function CTA() {
                   color: 'var(--cream)', letterSpacing: '-1.5px', lineHeight: 1.1,
                 }}
               >
-                Ready to tell
+                Your story matters. 
+
               </span>
             </span>
             <span className="cta-line-wrap">
@@ -225,7 +226,7 @@ export default function CTA() {
                   fontStyle: 'italic',
                 }}
               >
-                your story?
+                Let's tell it right.
               </span>
             </span>
           </div>
@@ -239,8 +240,8 @@ export default function CTA() {
               maxWidth: 460, margin: '0 auto 52px',
             }}
           >
-            Book a free 30-minute discovery call. No pitch, no pressure — just a conversation
-            about where you are and where you want to go.
+          Book a free 30-minute discovery call. No pressure, just a conversation about where you are and where you want to go.
+
           </p>
 
           {/* Buttons */}

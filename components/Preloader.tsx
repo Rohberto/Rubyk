@@ -78,7 +78,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           >
             <img
-              src={LOGO_URL}
+              src='/rubyk.png'
               alt="Rubyk"
               style={{ height: 'clamp(36px, 6vw, 52px)', display: 'block' }}
               onError={(e) => {

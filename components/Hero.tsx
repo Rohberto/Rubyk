@@ -125,9 +125,9 @@ export default function Hero() {
           }}
         >
           {[
-            { text: 'Stories that move',    italic: false },
-            { text: 'investors, customers', italic: true  },
-            { text: 'and partners.',         italic: false },
+            { text: 'Stories that converts',    italic: false },
+            { text: 'investors, partners', italic: true  },
+            { text: 'and customers.',         italic: false },
           ].map(({ text, italic }) => (
             <span key={text} style={{ display: 'block', overflow: 'hidden' }}>
               <motion.span
@@ -158,8 +158,8 @@ export default function Hero() {
             marginBottom: 48,
           }}
         >
-          Rubyk turns your ideas into narratives that cut through the noise — pitch decks,
-          brand identity, and content strategy built for founders who are ready to be heard.
+          Rubyk turns your ideas and products into pitch decks, brand identity, and content that get you funded, followed, and backed.
+
         </motion.p>
 
         {/* CTAs */}
