@@ -11,7 +11,7 @@ const cormorant = localFont({
   src: [
     { path: '../public/fonts/Gambetta-Regular.otf',     weight: '400', style: 'normal' },
     { path: '../public/fonts/Gambetta-Medium.otf',      weight: '500', style: 'normal' },
-    { path: '../public/fonts/Gambetta-SemiBold.otf',    weight: '600', style: 'normal' },
+    { path: '../public/fonts/Gambetta-Semibold.otf',    weight: '600', style: 'normal' },
     { path: '../public/fonts/Gambetta-Bold.otf',        weight: '700', style: 'normal' },
   ],
   variable: '--font-cormorant',
