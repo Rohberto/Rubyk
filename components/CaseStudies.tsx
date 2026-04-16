@@ -11,7 +11,7 @@ export default async function CaseStudies() {
     .order('created_at', { ascending: false })
     .limit(3)
 
-  const items = (posts ?? []).map((p) => ({
+  const items = (posts ?? []).map((p:any) => ({
     slug:   p.slug,
     cat:    Array.isArray(p.tags) && p.tags.length > 0
               ? p.tags.join(' · ')
