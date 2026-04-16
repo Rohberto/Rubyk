@@ -6,13 +6,15 @@ import SectionLabel from './ui/SectionLabel'
 const founders = [
   {
     initial: 'V', name: 'Victory', role: 'Narrative & Strategy',
-    bio: "Content strategy, brand storytelling, and communications. Author of Nigeria's first report on the informal economy.",
+    image: '/images/victory.jpeg', // ← add this
+    bio: "...",
     skills: ['Brand Messaging', 'Content Strategy', 'Communications'],
     dark: false,
   },
   {
     initial: 'A', name: 'Andrew', role: 'Strategy & Finance',
-    bio: 'Programme management, strategy, and financial modelling — turning complex ideas into structured, executable plans.',
+    image: '/images/andrew.jpeg', // ← add this
+    bio: '...',
     skills: ['Financial Models', 'Programme Mgmt', 'Strategy'],
     dark: true,
   },
@@ -97,14 +99,15 @@ const STYLES = `
   }
   .founder-card:hover::after { transform: scaleX(1); }
 
-  .founder-avatar {
-    width: 48px; height: 48px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--font-cormorant), Georgia, serif;
-    font-size: 20px; font-weight: 700;
-    margin-bottom: 16px; flex-shrink: 0;
-    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
-  }
+.founder-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  margin-bottom: 16px; flex-shrink: 0;
+  overflow: hidden; /* ← add this so the img respects border-radius */
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+}
   .founder-card:hover .founder-avatar {
     transform: scale(1.1);
     box-shadow: 0 0 0 6px rgba(232,99,42,0.15);
@@ -246,17 +249,15 @@ export default function About() {
               fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
               lineHeight: 1.82, marginBottom: 16,
             }}>
-              Victory pulls from five years of content strategy, brand storytelling, and
-              communications — including Nigeria's first report on the informal economy.
-              Andrew brings deep expertise in programme management, strategy, and financial modelling.
+            We'd been working with early-stage founders separately for years before we started working together. For months, Victory was pulling Andrew in for financial models, and Andrew was bringing Victory in for messaging and copy. Building Rubyk to do this at scale was the obvious next step.
+
             </p>
             <p style={{
               fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
               lineHeight: 1.82, marginBottom: 32,
             }}>
-              After months of informally collaborating — Victory pulling Andrew in for models,
-              Andrew bringing Victory in for messaging — building something together felt
-              inevitable. Rubyk was born from that.
+             Victory brings six years of content strategy, brand storytelling, and communications, including authoring Nigeria's first report on the informal economy. Andrew brings five years of programme management and financial modelling, with work across four countries and partners, including Lenovo Foundation and Ventures Platform.
+
             </p>
             <div className="loc-pill">
               <span className="loc-dot" />
@@ -267,9 +268,14 @@ export default function About() {
           {/* Right: founder cards */}
           <div className="founders-stack">
             <div ref={card0Ref} className="founder-card founder-card-0">
-              <div className="founder-avatar" style={{
-                background: 'var(--orange)', color: '#fff',
-              }}>V</div>
+            <div className="founder-avatar" style={{
+  background: 'var(--orange)', color: '#fff',
+}}>
+  {founders[0].image
+    ? <img src={founders[0].image} alt={founders[0].name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%' }} />
+    : 'V'
+  }
+</div>
               <div className="founder-name">Victory</div>
               <div style={{
                 fontSize: 11, textTransform: 'uppercase', letterSpacing: '1.2px',
@@ -286,16 +292,21 @@ export default function About() {
             </div>
 
             <div ref={card1Ref} className="founder-card founder-card-1">
-              <div className="founder-avatar" style={{
-                background: 'var(--dark)', color: 'var(--orange)',
-              }}>A</div>
+             <div className="founder-avatar" style={{
+  background: 'var(--dark)', color: 'var(--orange)',
+}}>
+  {founders[1].image
+    ? <img src={founders[1].image} alt={founders[1].name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    : 'A'
+  }
+</div>
               <div className="founder-name">Andrew</div>
               <div style={{
                 fontSize: 11, textTransform: 'uppercase', letterSpacing: '1.2px',
                 color: 'var(--orange)', fontWeight: 500, marginBottom: 10,
               }}>Strategy & Finance</div>
               <p style={{ fontSize: 13, fontWeight: 300, color: 'var(--muted-text)', lineHeight: 1.68 }}>
-                Programme management, strategy, and financial modelling — turning complex ideas into structured, executable plans.
+               Programme management, strategy, and financial modelling, turning complex ideas into structured, executable plans.
               </p>
               <div style={{ marginTop: 14, display: 'flex', flexWrap: 'wrap', gap: '4px 6px' }}>
                 {['Financial Models', 'Programme Mgmt', 'Strategy'].map(sk => (

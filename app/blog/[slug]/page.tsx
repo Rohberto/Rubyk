@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { supabase, supabaseAdmin } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { remark } from 'remark'
 import html from 'remark-html'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import Footer from '@/components/Footer' 
+import type { BlogPost } from '@/lib/supabase'
 
 export const revalidate = 60
 
@@ -17,7 +18,7 @@ export async function generateStaticParams() {
     .from('blog_posts')
     .select('slug')
     .eq('published', true)
-  return (data ?? []).map(p => ({ slug: p.slug }))
+  return (data ?? []).map((p: BlogPost) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -62,31 +63,42 @@ export default async function PostPage({ params }: Props) {
       <Navbar />
       <main style={{ background: 'var(--cream)', minHeight: '100vh', paddingTop: 100 }}>
 
-        {/* Article header */}
+        {/* Article header — centred */}
         <header style={{
-          padding: 'clamp(48px, 6vw, 80px) clamp(20px, 7vw, 96px) clamp(40px, 5vw, 64px)',
+          padding:   'clamp(48px, 6vw, 80px) clamp(20px, 7vw, 96px) clamp(40px, 5vw, 56px)',
           borderBottom: '1px solid rgba(61,46,30,0.08)',
-          maxWidth: 800,
+          maxWidth:  800,
+          margin:    '0 auto',
+          textAlign: 'center',
         }}>
-          <Link
-            href="/blog"
-            className="back-link"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 6,
-              fontSize: 13, color: 'var(--muted-text)',
-              textDecoration: 'none', marginBottom: 28, transition: 'color 0.2s',
-            }}
-          >
-            ← All posts
-          </Link>
+          {/* Back link — left aligned inside the centred block */}
+          <div style={{ textAlign: 'left', marginBottom: 28 }}>
+            <Link
+              href="/blog"
+              className="back-link"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                fontSize: 13, color: 'var(--muted-text)',
+                textDecoration: 'none', transition: 'color 0.2s',
+              }}
+            >
+              ← All posts
+            </Link>
+          </div>
 
+          {/* Tags */}
           {post.tags && post.tags.length > 0 && (
-            <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
+            <div style={{
+              display: 'flex', gap: 6, flexWrap: 'wrap',
+              marginBottom: 20, justifyContent: 'center',
+            }}>
               {(post.tags as string[]).map((tag: string) => (
                 <span key={tag} style={{
                   fontSize: 11, fontWeight: 500, textTransform: 'uppercase',
-                  letterSpacing: '1.2px', color: 'var(--orange)',
-                  background: 'var(--orange-pale)', padding: '3px 9px', borderRadius: 20,
+                  letterSpacing: '1.2px',
+                  color:      tag.toLowerCase() === 'case study' ? '#fff' : 'var(--orange)',
+                  background: tag.toLowerCase() === 'case study' ? 'var(--orange)' : 'var(--orange-pale)',
+                  padding: '3px 9px', borderRadius: 20,
                 }}>
                   {tag}
                 </span>
@@ -94,18 +106,20 @@ export default async function PostPage({ params }: Props) {
             </div>
           )}
 
+          {/* Title */}
           <h1 style={{
             fontFamily:    'var(--font-cormorant), Georgia, serif',
             fontSize:      'clamp(36px, 4.5vw, 60px)', fontWeight: 600,
             color:         'var(--dark)', letterSpacing: '-1.5px',
-            lineHeight:    1.1, marginBottom: 20,
+            lineHeight:    1.1, marginBottom: 24,
           }}>
             {post.title}
           </h1>
 
+          {/* Meta */}
           <div style={{
-            display: 'flex', alignItems: 'center', gap: 12,
-            fontSize: 13, color: 'var(--muted-text)', flexWrap: 'wrap',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: 12, fontSize: 13, color: 'var(--muted-text)', flexWrap: 'wrap',
           }}>
             <span style={{ fontWeight: 500, color: 'var(--mid)' }}>{post.author}</span>
             <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--muted-text)' }} />
@@ -115,18 +129,45 @@ export default async function PostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Article body */}
+        {/* Cover image — full width */}
+        {post.cover_image && (
+          <div style={{
+            width:      '100%',
+            maxHeight:  520,
+            overflow:   'hidden',
+            background: 'var(--warm)',
+            display:    'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <img
+              src={post.cover_image}
+              alt={post.title}
+              style={{
+                width:     '100%',
+                maxHeight: 520,
+                objectFit: 'contain',
+                display:   'block',
+                padding:   'clamp(16px, 3vw, 40px)',
+              }}
+            />
+          </div>
+        )}
+
+        {/* Article body — centred */}
         <div style={{
-          padding: 'clamp(40px, 5vw, 64px) clamp(20px, 7vw, 96px) clamp(80px, 10vw, 120px)',
-          maxWidth: 800,
+          maxWidth: 740,
+          margin:   '0 auto',
+          padding:  'clamp(40px, 5vw, 64px) clamp(20px, 5vw, 48px) clamp(80px, 10vw, 120px)',
         }}>
           {post.excerpt && (
             <p style={{
-              fontFamily:    'var(--font-cormorant), Georgia, serif',
-              fontSize:      22, fontStyle: 'italic', fontWeight: 400,
-              color:         'var(--mid)', lineHeight: 1.7,
-              marginBottom:  40, paddingBottom: 40,
-              borderBottom:  '1px solid rgba(61,46,30,0.09)',
+              fontFamily:   'var(--font-cormorant), Georgia, serif',
+              fontSize:     22, fontStyle: 'italic', fontWeight: 400,
+              color:        'var(--mid)', lineHeight: 1.7,
+              marginBottom: 40, paddingBottom: 40,
+              borderBottom: '1px solid rgba(61,46,30,0.09)',
+              textAlign:    'center',
             }}>
               {post.excerpt}
             </p>

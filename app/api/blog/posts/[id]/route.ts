@@ -15,14 +15,15 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const { data, error } = await db
     .from('blog_posts')
     .update({
-      title:     body.title,
-      slug:      body.slug,
-      excerpt:   body.excerpt,
-      content:   body.content,
-      author:    body.author,
-      tags:      body.tags,
-      read_time: body.read_time,
-      published: body.published,
+      title:       body.title,
+      slug:        body.slug,
+      excerpt:     body.excerpt,
+      content:     body.content,
+      author:      body.author,
+      tags:        body.tags,
+      read_time:   body.read_time,
+      published:   body.published,
+      cover_image: body.cover_image ?? '',
     })
     .eq('id', params.id)
     .select()

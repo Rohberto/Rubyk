@@ -25,7 +25,7 @@ export default function Hero() {
         minHeight:  '100vh',
         display:    'flex',
         alignItems: 'center',
-        padding:    'clamp(100px, 10vw, 130px) clamp(24px, 7vw, 96px) 80px',
+        padding:    'clamp(100px, 10vw, 130px) clamp(20px, 5vw, 72px) 80px',
         overflow:   'hidden',
         background: 'var(--cream)',
       }}
@@ -117,7 +117,7 @@ export default function Hero() {
           style={{
             fontFamily:    'var(--font-cormorant), Georgia, serif',
             fontSize:      'clamp(48px, 5.8vw, 80px)',
-            fontWeight:    600,
+            fontWeight:    500,
             lineHeight:    1.04,
             letterSpacing: '-2px',
             color:         'var(--dark)',
@@ -125,7 +125,7 @@ export default function Hero() {
           }}
         >
           {[
-            { text: 'Stories that converts',    italic: false },
+            { text: 'Stories that move',    italic: false },
             { text: 'investors, partners', italic: true  },
             { text: 'and customers.',         italic: false },
           ].map(({ text, italic }) => (

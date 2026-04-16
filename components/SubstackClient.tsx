@@ -217,7 +217,7 @@ export default function SubstackClient({ posts }: { posts: SubstackPost[] }) {
               Get the next one in your inbox
             </h3>
             <p style={{ fontSize: 14, fontWeight: 300, color: 'var(--muted-text)' }}>
-              Strategy notes, story frameworks, and founder resources — no noise.
+              Strategy notes, story frameworks, and founder resources, no noise.
             </p>
           </div>
 

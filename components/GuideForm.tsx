@@ -113,7 +113,7 @@ export default function GuideForm({ formHeading, ctaLabel, disclaimer }: GuideFo
               fontSize: 14, fontWeight: 300,
               color: 'var(--muted-text)', marginBottom: 24, lineHeight: 1.6,
             }}>
-              Drop your name and email — we'll send the guide straight to your inbox.
+              Drop your name and email, we'll send the guide straight to your inbox.
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>

@@ -3,23 +3,28 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import MagneticButton from './ui/MagneticButton'
 import { useSiteReady } from './SiteReadyContext'
-import { CALENDLY_URL, LOGO_URL } from '@/data/content'
+import { CALENDLY_URL } from '@/data/content'
 
 const links: { label: string; href: string; highlight?: boolean }[] = [
-  { label: 'Home',       href: '/' },
-  { label: 'Services',   href: '/#services' },
-  { label: 'Work',       href: '/#work' },
-  { label: 'About',      href: '/#about' },
-  { label: 'Blog',       href: '/blog' },
-  { label: 'Free guide', href: '/guide', highlight: true },
-  { label: 'Quiz',       href: '/quiz',  highlight: false },
+  { label: 'Home',        href: '/' },
+  { label: 'Services',    href: '/#services' },
+  { label: 'Work',        href: '/#work' },
+  { label: 'About',       href: '/#about' },
+  { label: 'Case Studies',href: '/blog' },
+  { label: 'Quiz',        href: '/quiz' },
+  { label: 'Free guide',  href: '/guide', highlight: true },
 ]
+
+/* Pages whose hero is dark — nav links should be light when at top */
+const DARK_HERO_PAGES = ['/quiz', '/guide']
 
 export default function Navbar() {
   const ready               = useSiteReady()
   const { scrollY }         = useScroll()
+  const pathname            = usePathname()
   const [hidden, setHidden] = useState(false)
   const [atTop,  setAtTop]  = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -35,6 +40,12 @@ export default function Navbar() {
     }
     prev.current = latest
   })
+
+  /* When at top on a dark-hero page, use light colours */
+  const isDarkBg = atTop && !menuOpen && DARK_HERO_PAGES.includes(pathname)
+  const linkColor     = isDarkBg ? 'rgba(255,255,255,0.75)' : 'var(--mid)'
+  const linkHoverColor = 'var(--orange-light)'
+  const barColor      = isDarkBg ? 'rgba(255,255,255,0.15)' : 'var(--dark)'
 
   const Logo = () => (
     <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
@@ -53,7 +64,7 @@ export default function Navbar() {
         display: 'none',
         fontFamily: 'var(--font-cormorant), Georgia, serif',
         fontSize: 22, fontWeight: 700,
-        color: 'var(--orange)', letterSpacing: '-0.5px',
+        color: isDarkBg ? '#fff' : 'var(--orange)', letterSpacing: '-0.5px',
       }}>
         Rubyk
       </span>
@@ -76,7 +87,7 @@ export default function Navbar() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '0 clamp(20px, 5vw, 72px)',
           background:     atTop && !menuOpen ? 'transparent' : 'rgba(253,250,246,0.95)',
-          backdropFilter: atTop && !menuOpen ? 'none'        : 'blur(20px)',
+          backdropFilter: atTop && !menuOpen ? 'none'         : 'blur(20px)',
           borderBottom:   atTop && !menuOpen ? '1px solid transparent' : '1px solid rgba(61,46,30,0.08)',
           transition: 'background 0.35s, backdrop-filter 0.35s, border-color 0.35s',
         }}
@@ -95,20 +106,21 @@ export default function Navbar() {
               {l.highlight ? (
                 <Link href={l.href} style={{
                   fontSize: 12, fontWeight: 500,
-                  color: 'var(--orange)', textDecoration: 'none',
-                  border: '1px solid rgba(232,99,42,0.4)',
+                  color: isDarkBg ? '#fff' : 'var(--orange)',
+                  textDecoration: 'none',
+                  border: `1px solid ${isDarkBg ? 'rgba(255,255,255,0.4)' : 'rgba(232,99,42,0.4)'}`,
                   borderRadius: 20, padding: '5px 13px',
                   transition: 'all 0.2s', letterSpacing: '0.2px',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--orange)'
-                  e.currentTarget.style.color = '#fff'
-                  e.currentTarget.style.borderColor = 'var(--orange)'
+                  e.currentTarget.style.background   = 'var(--orange)'
+                  e.currentTarget.style.color        = '#fff'
+                  e.currentTarget.style.borderColor  = 'var(--orange)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.color = 'var(--orange)'
-                  e.currentTarget.style.borderColor = 'rgba(232,99,42,0.4)'
+                  e.currentTarget.style.background   = 'transparent'
+                  e.currentTarget.style.color        = isDarkBg ? '#fff' : 'var(--orange)'
+                  e.currentTarget.style.borderColor  = isDarkBg ? 'rgba(255,255,255,0.4)' : 'rgba(232,99,42,0.4)'
                 }}
                 >
                   {l.label}
@@ -116,11 +128,12 @@ export default function Navbar() {
               ) : (
                 <Link href={l.href} style={{
                   fontSize: 14, fontWeight: 400,
-                  color: 'var(--mid)', textDecoration: 'none',
+                  color: linkColor,
+                  textDecoration: 'none',
                   letterSpacing: '0.1px', transition: 'color 0.2s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--orange)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--mid)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--orange-light)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = linkColor)}
                 >
                   {l.label}
                 </Link>
@@ -154,17 +167,17 @@ export default function Navbar() {
           <motion.span
             animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            style={{ display: 'block', width: 22, height: 1.5, background: 'var(--dark)', borderRadius: 2, transformOrigin: 'center' }}
+            style={{ display: 'block', width: 22, height: 1.5, background: barColor, borderRadius: 2, transformOrigin: 'center' }}
           />
           <motion.span
             animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
             transition={{ duration: 0.2 }}
-            style={{ display: 'block', width: 22, height: 1.5, background: 'var(--dark)', borderRadius: 2 }}
+            style={{ display: 'block', width: 22, height: 1.5, background: barColor, borderRadius: 2 }}
           />
           <motion.span
             animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            style={{ display: 'block', width: 22, height: 1.5, background: 'var(--dark)', borderRadius: 2, transformOrigin: 'center' }}
+            style={{ display: 'block', width: 22, height: 1.5, background: barColor, borderRadius: 2, transformOrigin: 'center' }}
           />
         </button>
       </motion.nav>
@@ -198,15 +211,15 @@ export default function Navbar() {
                   style={{
                     display: 'block',
                     fontFamily: l.highlight ? 'var(--font-outfit), system-ui, sans-serif' : 'var(--font-cormorant), Georgia, serif',
-                    fontSize: l.highlight ? 16 : 32,
+                    fontSize:   l.highlight ? 16 : 32,
                     fontWeight: l.highlight ? 500 : 600,
-                    color: l.highlight ? 'var(--orange)' : 'var(--dark)',
+                    color:      l.highlight ? 'var(--orange)' : 'var(--dark)',
                     textDecoration: 'none',
-                    letterSpacing: l.highlight ? '0.2px' : '-0.5px',
-                    lineHeight: 1.3,
-                    padding: l.highlight ? '10px 0' : '6px 0',
+                    letterSpacing:  l.highlight ? '0.2px' : '-0.5px',
+                    lineHeight:  1.3,
+                    padding:     l.highlight ? '10px 0' : '6px 0',
                     borderBottom: '1px solid rgba(61,46,30,0.07)',
-                    transition: 'color 0.2s',
+                    transition:  'color 0.2s',
                   }}
                 >
                   {l.highlight ? `↓ ${l.label}` : l.label}

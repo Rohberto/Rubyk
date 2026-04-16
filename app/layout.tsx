@@ -1,18 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Cormorant_Garamond, Outfit, Inter_Tight } from 'next/font/google'
+import { Inter_Tight } from 'next/font/google'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
 import CustomCursor from '@/components/CustomCursor'
 import PreloaderWrapper from '@/components/PreloaderWrapper'
-
+import Script from 'next/script'
 import localFont from 'next/font/local'
 
 const cormorant = localFont({
   src: [
-    { path: '../public/fonts/Gambetta-Regular.otf',     weight: '400', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Medium.otf',      weight: '500', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Semibold.otf',    weight: '600', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Bold.otf',        weight: '700', style: 'normal' },
+    { path: '../public/fonts/Gambetta-Regular.otf',  weight: '400', style: 'normal' },
+    { path: '../public/fonts/Gambetta-Medium.otf',   weight: '500', style: 'normal' },
+    { path: '../public/fonts/Gambetta-Semibold.otf', weight: '600', style: 'normal' },
+    { path: '../public/fonts/Gambetta-Bold.otf',     weight: '700', style: 'normal' },
   ],
   variable: '--font-cormorant',
   display: 'swap',
@@ -27,16 +27,15 @@ const outfit = Inter_Tight({
 
 /* ── Viewport ──────────────────────────────────────────────── */
 export const viewport: Viewport = {
-  width:              'device-width',
-  initialScale:       1,
-  maximumScale:       5,
-  themeColor:         '#0F0A04',
-  colorScheme:        'light',
+  width:        'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor:   '#0F0A04',
+  colorScheme:  'light',
 }
 
 /* ── Metadata ──────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  /* Core */
   metadataBase: new URL('https://rubyk.co'),
   title: {
     default:  'Rubyk — Stories that move investors, customers and partners',
@@ -49,27 +48,24 @@ export const metadata: Metadata = {
     'startup branding', 'content strategy', 'fundraising storytelling',
     'brand identity Africa', 'Rubyk', 'founder story',
   ],
-  authors:  [{ name: 'Rubyk', url: 'https://rubyk.co' }],
-  creator:  'Rubyk',
-  publisher:'Rubyk',
+  authors:   [{ name: 'Rubyk', url: 'https://rubyk.co' }],
+  creator:   'Rubyk',
+  publisher: 'Rubyk',
 
-  /* Canonical */
   alternates: { canonical: 'https://rubyk.co' },
 
-  /* Robots */
   robots: {
-    index:            true,
-    follow:           true,
+    index:  true,
+    follow: true,
     googleBot: {
-      index:              true,
-      follow:             true,
+      index:               true,
+      follow:              true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet':       -1,
     },
   },
 
-  /* Open Graph */
   openGraph: {
     type:        'website',
     locale:      'en_US',
@@ -87,7 +83,6 @@ export const metadata: Metadata = {
     ],
   },
 
-  /* Twitter / X */
   twitter: {
     card:        'summary_large_image',
     site:        '@rubykcreatives',
@@ -97,7 +92,6 @@ export const metadata: Metadata = {
     images:      ['/og-image.png'],
   },
 
-  /* Favicon / icons */
   icons: {
     icon: [
       { url: '/favicon.ico',          sizes: 'any' },
@@ -107,23 +101,16 @@ export const metadata: Metadata = {
       { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
     shortcut: '/favicon.ico',
-    apple:    [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
 
-  /* Web app manifest */
   manifest: '/site.webmanifest',
 
-  /* Verification (add your codes when you have them) */
   verification: {
     google: 'add-your-google-search-console-code-here',
   },
 
-  /* App links */
   appLinks: {},
-
-  /* Category */
   category: 'business',
 }
 
@@ -131,6 +118,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${cormorant.variable} ${outfit.variable}`}>
       <body>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8B2F3QM4M2"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8B2F3QM4M2');
+          `}
+        </Script>
+
         <LenisProvider>
           <CustomCursor />
           <PreloaderWrapper>

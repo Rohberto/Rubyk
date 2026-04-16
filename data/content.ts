@@ -8,7 +8,7 @@ export const services = [
   {
     num: '02',
     title: 'Fundraising & Investor Storytelling',
-    desc: 'Tell a story investors can believe in — and act on.',
+    desc: 'Tell a story investors can believe in and act on.',
     tags: ['Pitch Decks', 'Financial Models', 'Investor Materials'],
   },
   {
@@ -59,16 +59,16 @@ export const testimonials = [
     quote:
       'Victory finds it easy to transform data into compelling business narratives, applying a lot of critical thinking in the process. It’s rare to find that blend of clear storytelling and deep analysis, but Victory brings both.',
     name: 'Didi',
-    role: 'VP Comms, Moniepoint · Lagos',
+    role: 'VP Comms, Moniepoint',
     initials: '',
     img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
   {
     quote:
-      'The financial model Andrew built wasn\'t just numbers — it told the story of how our business scales. Investors kept complimenting it in every single meeting.',
-    name: 'Zara Ndlovu',
-    role: 'CEO, Kasa Homes · Nairobi',
-    initials: 'ZN',
+      'Rubyk delivered an excellent job. They are very professional and excellent',
+    name: 'Ayo Falowo',
+    role: 'CEO, FieldWatch',
+    initials: 'AF',
     img: 'https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
 ]

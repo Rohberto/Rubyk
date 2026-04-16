@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { supabaseAdmin } from '@/lib/supabase'
 import { guide } from '@/data/guide'
 
 export async function POST(req: NextRequest) {
@@ -15,7 +16,22 @@ export async function POST(req: NextRequest) {
 
   const firstName = name.split(' ')[0]
 
-  const html = `
+  /* ── Fetch latest download URL from Supabase ── */
+  const { data: config } = await supabaseAdmin()
+    .from('guide_config')
+    .select('download_url, headline')
+    .eq('id', 1)
+    .single()
+
+  const downloadUrl = config?.download_url || guide.downloadUrl
+  const headline    = config?.headline    || guide.headline
+
+  /* ── Save lead to Supabase ── */
+  await supabaseAdmin()
+    .from('guide_leads')
+    .insert([{ name, email }])
+
+  const htmlBody = `
     <!DOCTYPE html>
     <html>
     <head>
@@ -39,7 +55,6 @@ export async function POST(req: NextRequest) {
               <!-- Body -->
               <tr>
                 <td style="background:#fff;border:1px solid rgba(61,46,30,0.10);border-radius:16px;padding:40px;">
-
                   <p style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:2px;
                     color:#E8632A;margin:0 0 16px;">Your free guide</p>
 
@@ -49,15 +64,14 @@ export async function POST(req: NextRequest) {
                   </h1>
 
                   <p style="font-size:16px;font-weight:300;color:#7A6252;line-height:1.75;margin:0 0 32px;">
-                    Thanks for downloading <em>${guide.headline}</em>.
+                    Thanks for downloading <em>${headline}</em>.
                     Click the button below to access your copy.
                   </p>
 
-                  <!-- CTA Button -->
                   <table cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
                     <tr>
                       <td style="background:#E8632A;border-radius:8px;">
-                        <a href="${guide.downloadUrl}"
+                        <a href="${downloadUrl}"
                           style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:500;
                           color:#fff;text-decoration:none;letter-spacing:0.2px;">
                           Download the guide →
@@ -68,11 +82,10 @@ export async function POST(req: NextRequest) {
 
                   <p style="font-size:13px;font-weight:300;color:#7A6252;line-height:1.7;margin:0;">
                     If the button doesn't work, copy and paste this link into your browser:<br/>
-                    <a href="${guide.downloadUrl}" style="color:#E8632A;word-break:break-all;">
-                      ${guide.downloadUrl}
+                    <a href="${downloadUrl}" style="color:#E8632A;word-break:break-all;">
+                      ${downloadUrl}
                     </a>
                   </p>
-
                 </td>
               </tr>
 
@@ -103,8 +116,8 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify({
         from:    'Rubyk <hello@rubyk.co>',
         to:      [email],
-        subject: `Your copy of "${guide.headline}"`,
-        html,
+        subject: `Your copy of "${headline}"`,
+        html:    htmlBody,
       }),
     })
 

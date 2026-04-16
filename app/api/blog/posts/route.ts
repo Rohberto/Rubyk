@@ -28,14 +28,15 @@ export async function POST(req: NextRequest) {
   const { data, error } = await db
     .from('blog_posts')
     .insert([{
-      title:     body.title,
-      slug:      body.slug,
-      excerpt:   body.excerpt   ?? '',
-      content:   body.content   ?? '',
-      author:    body.author    ?? 'Rubyk',
-      tags:      body.tags      ?? [],
-      read_time: body.read_time ?? '5 min read',
-      published: body.published ?? false,
+      title:       body.title,
+      slug:        body.slug,
+      excerpt:     body.excerpt     ?? '',
+      content:     body.content     ?? '',
+      author:      body.author      ?? 'Rubyk',
+      tags:        body.tags        ?? [],
+      read_time:   body.read_time   ?? '5 min read',
+      published:   body.published   ?? false,
+      cover_image: body.cover_image ?? '',
     }])
     .select()
     .single()

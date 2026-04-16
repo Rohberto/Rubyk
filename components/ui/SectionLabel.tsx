@@ -18,15 +18,7 @@ export default function SectionLabel({ children, light = false }: SectionLabelPr
         marginBottom: 16,
       }}
     >
-      <span
-        style={{
-          display: 'block',
-          width: 24,
-          height: 1.5,
-          background: light ? 'var(--orange-light)' : 'var(--orange)',
-          flexShrink: 0,
-        }}
-      />
+     
       {children}
     </div>
   )

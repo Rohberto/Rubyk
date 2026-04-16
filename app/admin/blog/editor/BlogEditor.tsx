@@ -6,12 +6,12 @@ import Link from 'next/link'
 
 interface PostForm {
   title: string; slug: string; excerpt: string; content: string
-  author: string; tags: string; read_time: string; published: boolean
+  author: string; tags: string; read_time: string; cover_image: string; published: boolean
 }
 
 const empty: PostForm = {
   title: '', slug: '', excerpt: '', content: '',
-  author: 'Rubyk', tags: '', read_time: '5 min read', published: false,
+  author: 'Rubyk', tags: '', read_time: '5 min read', cover_image: '', published: false,
 }
 
 function slugify(s: string) {
@@ -61,7 +61,7 @@ export default function BlogEditor() {
 
   const save = useCallback(async (publish: boolean) => {
     setStatus('saving'); setErrMsg('')
-    const payload = { ...form, tags: form.tags.split(',').map(t => t.trim()).filter(Boolean), published: publish }
+    const payload = { ...form, tags: form.tags.split(',').map(t => t.trim()).filter(Boolean), published: publish, cover_image: form.cover_image }
     const url    = editId ? `/api/blog/posts/${editId}` : '/api/blog/posts'
     const method = editId ? 'PUT' : 'POST'
     const res  = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
@@ -172,7 +172,24 @@ export default function BlogEditor() {
               placeholder="Victory" onFocus={focus} onBlur={blur} />
           </div>
           <div>
-            <span style={lbl}>Tags (comma separated)</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+              <span style={lbl}>Tags (comma separated)</span>
+              <button
+                onClick={() => {
+                  const current = form.tags.trim()
+                  const hasCS = current.toLowerCase().includes('case study')
+                  if (!hasCS) set('tags', current ? `${current}, Case Study` : 'Case Study')
+                }}
+                style={{
+                  fontSize: 10, fontWeight: 500, color: 'var(--orange)',
+                  background: 'rgba(232,99,42,0.12)', border: '1px solid rgba(232,99,42,0.25)',
+                  borderRadius: 20, padding: '2px 10px', cursor: 'pointer',
+                  fontFamily: 'var(--font-outfit), system-ui, sans-serif',
+                }}
+              >
+                + Case Study
+              </button>
+            </div>
             <input style={inp()} value={form.tags} onChange={e => set('tags', e.target.value)}
               placeholder="Fundraising, Storytelling" onFocus={focus} onBlur={blur} />
           </div>
@@ -180,6 +197,15 @@ export default function BlogEditor() {
             <span style={lbl}>Read time</span>
             <input style={inp()} value={form.read_time} onChange={e => set('read_time', e.target.value)}
               placeholder="5 min read" onFocus={focus} onBlur={blur} />
+          </div>
+          <div>
+            <span style={lbl}>Cover image URL</span>
+            <input style={inp()} value={form.cover_image} onChange={e => set('cover_image', e.target.value)}
+              placeholder="https://... (Google Drive, Cloudinary, etc.)" onFocus={focus} onBlur={blur} />
+            {form.cover_image && (
+              <img src={form.cover_image} alt="Cover preview"
+                style={{ marginTop: 8, width: '100%', height: 100, objectFit: 'cover', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)' }} />
+            )}
           </div>
           <div style={{
             padding: '12px 14px', background: 'rgba(255,255,255,0.04)',

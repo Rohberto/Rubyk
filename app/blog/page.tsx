@@ -21,6 +21,7 @@ function toPost(p: BlogPost): Post {
     author:   p.author,
     tags:     p.tags ?? [],
     readTime: p.read_time,
+    coverImage: p.cover_image || undefined,
   }
 }
 
@@ -32,6 +33,7 @@ export default async function BlogPage() {
     .order('created_at', { ascending: false })
 
   const posts: Post[] = (data ?? []).map(toPost)
+
 
   return (
     <>
@@ -50,14 +52,14 @@ export default async function BlogPage() {
           padding:      'clamp(48px, 6vw, 80px) clamp(20px, 7vw, 96px) 0',
           marginBottom: 64,
           borderBottom: '1px solid rgba(61,46,30,0.08)',
+          textAlign:   'center',
         }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 10,
             fontSize: 11, fontWeight: 500, textTransform: 'uppercase',
-            letterSpacing: '2px', color: 'var(--orange)', marginBottom: 14,
+            letterSpacing: '2px', color: 'var(--orange)', marginBottom: 14, textAlign: 'center'
           }}>
-            <span style={{ display: 'block', width: 24, height: 1.5, background: 'var(--orange)' }} />
-            The Rubyk blog
+            Rubyk Case Studies
           </div>
 
           <h1 style={{
@@ -70,7 +72,7 @@ export default async function BlogPage() {
 
           <p style={{
             fontSize: 17, fontWeight: 300, color: 'var(--muted-text)',
-            lineHeight: 1.78, maxWidth: 480, paddingBottom: 40,
+            lineHeight: 1.78, maxWidth: 480, paddingBottom: 40, textAlign: 'center', margin: '0 auto',  
           }}>
             Strategy notes, story frameworks, and honest reflections on building
             businesses in Africa and beyond.
@@ -91,10 +93,12 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div style={{
-              display:             'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-              gap:                 28,
-            }}>
+  display:             'grid',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gap:                 28,
+  maxWidth:            960,   // ← optional: tighten the grid width
+  margin:              '0 auto', // ← centers the grid block itself
+}}>
               {posts.map(post => (
                 <BlogCard key={post.slug} post={post} />
               ))}
