@@ -19,7 +19,7 @@ const links: { label: string; href: string; highlight?: boolean }[] = [
 ]
 
 /* Pages whose hero is dark — nav links should be light when at top */
-const DARK_HERO_PAGES = ['/quiz', '/guide']
+const DARK_HERO_PAGES = [ '/guide']
 
 export default function Navbar() {
   const ready               = useSiteReady()
