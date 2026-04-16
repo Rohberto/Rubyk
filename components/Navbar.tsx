@@ -109,7 +109,7 @@ export default function Navbar() {
                   color: isDarkBg ? '#fff' : 'var(--orange)',
                   textDecoration: 'none',
                   border: `1px solid ${isDarkBg ? 'rgba(255,255,255,0.4)' : 'rgba(232,99,42,0.4)'}`,
-                  borderRadius: 20, padding: '5px 13px',
+                  borderRadius: 10, padding: '10px 13px',
                   transition: 'all 0.2s', letterSpacing: '0.2px',
                 }}
                 onMouseEnter={(e) => {
