@@ -70,7 +70,7 @@ export default function QuizClient() {
       const data = await res.json()
 
       if (!res.ok) {
-        setSendError(data.error ?? 'Failed to send email. Please try again.')
+        setSendError('Failed to send email. Please try again.')
         setSending(false)
         return
       }

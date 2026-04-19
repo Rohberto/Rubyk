@@ -11,7 +11,6 @@ import { CALENDLY_URL } from '@/data/content'
 const links: { label: string; href: string; highlight?: boolean }[] = [
   { label: 'Home',        href: '/' },
   { label: 'Services',    href: '/#services' },
-  { label: 'Work',        href: '/#work' },
   { label: 'About',       href: '/#about' },
   { label: 'Case Studies',href: '/blog' },
   { label: 'Quiz',        href: '/quiz' },

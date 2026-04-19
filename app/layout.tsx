@@ -1,28 +1,24 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter_Tight } from 'next/font/google'
+import { Cormorant_Garamond, Outfit } from 'next/font/google'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
 import CustomCursor from '@/components/CustomCursor'
 import PreloaderWrapper from '@/components/PreloaderWrapper'
 import Script from 'next/script'
 import localFont from 'next/font/local'
-
-const cormorant = localFont({
-  src: [
-    { path: '../public/fonts/Gambetta-Regular.otf',  weight: '400', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Medium.otf',   weight: '500', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Semibold.otf', weight: '600', style: 'normal' },
-    { path: '../public/fonts/Gambetta-Bold.otf',     weight: '700', style: 'normal' },
-  ],
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   variable: '--font-cormorant',
   display: 'swap',
 })
 
-const outfit = Inter_Tight({
-  subsets:  ['latin'],
-  weight:   ['300', '400', '500', '600'],
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-outfit',
-  display:  'swap',
+  display: 'swap',
 })
 
 /* ── Viewport ──────────────────────────────────────────────── */

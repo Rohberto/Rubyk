@@ -117,7 +117,7 @@ export default function Hero() {
           style={{
             fontFamily:    'var(--font-cormorant), Georgia, serif',
             fontSize:      'clamp(48px, 5.8vw, 80px)',
-            fontWeight:    500,
+            fontWeight:    600,
             lineHeight:    1.04,
             letterSpacing: '-2px',
             color:         'var(--dark)',

@@ -69,8 +69,8 @@ export async function POST(req: NextRequest) {
               <table cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
                 <tr>
                   <td style="background:#E8632A;border-radius:8px;">
-                    <a href="https://rubyk.co/quiz" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:500;color:#fff;text-decoration:none;">
-                      View full results →
+                    <a href="https://calendly.com/victory-rubyk" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:500;color:#fff;text-decoration:none;">
+                      Book a call →
                     </a>
                   </td>
                 </tr>
