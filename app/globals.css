@@ -387,3 +387,8 @@ body {
   .connector-circle { display: none !important; }
   .case-header { grid-template-columns: 1fr !important; gap: 16px !important; }
 }
+@media (max-width: 768px) {
+  body {
+    cursor: none;
+  }
+}

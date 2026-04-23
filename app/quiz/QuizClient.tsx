@@ -60,12 +60,15 @@ export default function QuizClient() {
       const res  = await fetch('/api/quiz/send-results', {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({
-          name, email,
-          score:    totalScore,
-          tier:     result.tier,
-          headline: result.headline,
-        }),
+       body: JSON.stringify({
+  name, email,
+  score:    totalScore,
+  tier:     result.tier,
+  headline: result.headline,
+  strengths: result.strengths,   // ← add
+  gaps:      result.gaps,        // ← add
+  answers,                        // ← add (array of scores per question)
+}),
       })
       const data = await res.json()
 

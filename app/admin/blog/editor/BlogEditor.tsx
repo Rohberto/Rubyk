@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -36,12 +36,16 @@ export default function BlogEditor() {
   const router       = useRouter()
   const searchParams = useSearchParams()
   const editId       = searchParams.get('id')
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const [form,       setForm]       = useState<PostForm>(empty)
-  const [status,     setStatus]     = useState<'idle'|'saving'|'saved'|'error'>('idle')
-  const [errMsg,     setErrMsg]     = useState('')
-  const [slugLocked, setSlugLocked] = useState(false)
-  const [loading,    setLoading]    = useState(!!editId)
+  const [form,         setForm]         = useState<PostForm>(empty)
+  const [status,       setStatus]       = useState<'idle'|'saving'|'saved'|'error'>('idle')
+  const [errMsg,       setErrMsg]       = useState('')
+  const [slugLocked,   setSlugLocked]   = useState(false)
+  const [loading,      setLoading]      = useState(!!editId)
+  const [uploading,    setUploading]    = useState(false)
+  const [uploadErr,    setUploadErr]    = useState('')
+  const [dragOver,     setDragOver]     = useState(false)
 
   useEffect(() => {
     if (!editId) return
@@ -59,9 +63,36 @@ export default function BlogEditor() {
   const set = (k: keyof PostForm, v: string | boolean) =>
     setForm(f => ({ ...f, [k]: v }))
 
+  const uploadFile = async (file: File) => {
+    setUploading(true)
+    setUploadErr('')
+    const fd = new FormData()
+    fd.append('file', file)
+    const res  = await fetch('/api/blog/upload', { method: 'POST', body: fd })
+    const data = await res.json()
+    setUploading(false)
+    if (!res.ok) { setUploadErr(data.error ?? 'Upload failed'); return }
+    set('cover_image', data.url)
+  }
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) uploadFile(file)
+  }
+
+  const onDrop = (e: React.DragEvent) => {
+    e.preventDefault(); setDragOver(false)
+    const file = e.dataTransfer.files?.[0]
+    if (file) uploadFile(file)
+  }
+
   const save = useCallback(async (publish: boolean) => {
     setStatus('saving'); setErrMsg('')
-    const payload = { ...form, tags: form.tags.split(',').map(t => t.trim()).filter(Boolean), published: publish, cover_image: form.cover_image }
+    const payload = {
+      ...form,
+      tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+      published: publish,
+    }
     const url    = editId ? `/api/blog/posts/${editId}` : '/api/blog/posts'
     const method = editId ? 'PUT' : 'POST'
     const res  = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
@@ -128,10 +159,10 @@ export default function BlogEditor() {
         </div>
       </div>
 
-      {/* Body - 3 column grid */}
+      {/* Body */}
       <div className="editor-grid" style={{ flex: 1 }}>
 
-        {/* Sidebar: metadata */}
+        {/* Sidebar */}
         <div style={{
           borderRight: '1px solid rgba(255,255,255,0.07)',
           padding: 'clamp(16px, 2.5vw, 28px)',
@@ -156,9 +187,7 @@ export default function BlogEditor() {
                 </button>
               )}
             </div>
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', marginTop: 4 }}>
-              /blog/{form.slug || '…'}
-            </p>
+            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', marginTop: 4 }}>/blog/{form.slug || '…'}</p>
           </div>
           <div>
             <span style={lbl}>Excerpt</span>
@@ -186,9 +215,7 @@ export default function BlogEditor() {
                   borderRadius: 20, padding: '2px 10px', cursor: 'pointer',
                   fontFamily: 'var(--font-outfit), system-ui, sans-serif',
                 }}
-              >
-                + Case Study
-              </button>
+              >+ Case Study</button>
             </div>
             <input style={inp()} value={form.tags} onChange={e => set('tags', e.target.value)}
               placeholder="Fundraising, Storytelling" onFocus={focus} onBlur={blur} />
@@ -198,15 +225,71 @@ export default function BlogEditor() {
             <input style={inp()} value={form.read_time} onChange={e => set('read_time', e.target.value)}
               placeholder="5 min read" onFocus={focus} onBlur={blur} />
           </div>
+
+          {/* Cover image upload */}
           <div>
-            <span style={lbl}>Cover image URL</span>
-            <input style={inp()} value={form.cover_image} onChange={e => set('cover_image', e.target.value)}
-              placeholder="https://... (Google Drive, Cloudinary, etc.)" onFocus={focus} onBlur={blur} />
-            {form.cover_image && (
-              <img src={form.cover_image} alt="Cover preview"
-                style={{ marginTop: 8, width: '100%', height: 100, objectFit: 'cover', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)' }} />
+            <span style={lbl}>Cover image</span>
+
+            {/* Drop zone */}
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={e => { e.preventDefault(); setDragOver(true) }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={onDrop}
+              style={{
+                border: `2px dashed ${dragOver ? 'var(--orange)' : 'rgba(255,255,255,0.12)'}`,
+                borderRadius: 10, padding: '20px 16px', textAlign: 'center',
+                cursor: 'pointer', transition: 'border-color 0.2s, background 0.2s',
+                background: dragOver ? 'rgba(232,99,42,0.06)' : 'rgba(255,255,255,0.02)',
+              }}
+            >
+              {uploading ? (
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', margin: 0 }}>Uploading…</p>
+              ) : (
+                <>
+                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', margin: '0 0 4px' }}>
+                    Drop image here or click to browse
+                  </p>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', margin: 0 }}>
+                    JPEG, PNG, WEBP, GIF — max 5MB
+                  </p>
+                </>
+              )}
+            </div>
+            <input ref={fileInputRef} type="file" accept="image/*" onChange={onFileChange}
+              style={{ display: 'none' }} />
+
+            {uploadErr && (
+              <p style={{ fontSize: 12, color: '#e74c3c', marginTop: 6 }}>{uploadErr}</p>
             )}
+
+            {/* Preview */}
+            {form.cover_image && (
+              <div style={{ position: 'relative', marginTop: 10 }}>
+                <img src={form.cover_image} alt="Cover preview"
+                  style={{ width: '100%', height: 110, objectFit: 'cover', borderRadius: 8, border: '1px solid rgba(255,255,255,0.1)', display: 'block' }} />
+                <button
+                  onClick={() => set('cover_image', '')}
+                  style={{
+                    position: 'absolute', top: 6, right: 6,
+                    background: 'rgba(0,0,0,0.6)', border: 'none', color: '#fff',
+                    borderRadius: '50%', width: 24, height: 24, cursor: 'pointer',
+                    fontSize: 13, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}
+                >×</button>
+              </div>
+            )}
+
+            {/* Also allow pasting a URL as fallback */}
+            <input
+              style={{ ...inp(), marginTop: 10, fontSize: 12 }}
+              value={form.cover_image}
+              onChange={e => set('cover_image', e.target.value)}
+              placeholder="Or paste an image URL directly"
+              onFocus={focus} onBlur={blur}
+            />
           </div>
+
           <div style={{
             padding: '12px 14px', background: 'rgba(255,255,255,0.04)',
             borderRadius: 10, border: '1px solid rgba(255,255,255,0.07)',
