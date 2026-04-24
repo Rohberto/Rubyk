@@ -76,15 +76,9 @@ const htmlBody = `
 
           <tr><td style="background:#fff;border:1px solid rgba(61,46,30,0.10);border-radius:16px;padding:40px;">
 
-            <p style="font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:#E8632A;margin:0 0 12px;">
-              Your quiz results
-            </p>
             <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:600;color:#1E1409;letter-spacing:-0.5px;line-height:1.2;margin:0 0 8px;">
               ${firstName}, here are your results.
             </h1>
-            <p style="font-size:15px;font-weight:300;color:#7A6252;line-height:1.7;margin:0 0 28px;">
-              You completed the Rubyk Founder Storytelling Quiz.
-            </p>
 
             <!-- Score card -->
             <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">

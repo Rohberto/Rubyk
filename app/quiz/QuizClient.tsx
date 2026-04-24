@@ -131,8 +131,8 @@ export default function QuizClient() {
             fontSize: 'clamp(40px, 5.5vw, 72px)', fontWeight: 600,
             color: 'var(--dark)', letterSpacing: '-2px', lineHeight: 1.06, marginBottom: 20,
           }}>
-          How strong is your<br />
-          <em style={{ color: 'var(--orange)', fontStyle: 'italic' }}>founder story?</em>
+          How strong is<br />
+          <em style={{ color: 'var(--orange)', fontStyle: 'italic' }}>your story?</em>
         </motion.h1>
 
         <motion.p initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.22 }}
@@ -140,9 +140,7 @@ export default function QuizClient() {
             fontSize: 18, fontWeight: 300, color: 'var(--muted-text)', lineHeight: 1.78,
             maxWidth: 520, margin: '0 auto 48px',
           }}>
-          Answer 10 questions about your pitch, brand, and messaging.
-          Get a personalised score and a clear picture of where your narrative
-          is working and where it's costing you.
+        Let's do a quick audit of your startup's pitch, brand and messaging. Answer 10 questions, and get a personalised score with an overview of where your story is working and where it's costing you.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease, delay: 0.35 }}
@@ -155,10 +153,8 @@ export default function QuizClient() {
           }}
           onMouseEnter={e => (e.currentTarget.style.background = 'var(--dark)')}
           onMouseLeave={e => (e.currentTarget.style.background = 'var(--orange)')}
-          >Start the quiz →</button>
-          <p style={{ fontSize: 12, color: 'var(--muted-text)', fontWeight: 300 }}>
-            Results sent to your inbox · Free · No spam
-          </p>
+          >Start the audit →</button>
+         
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.7 }}
@@ -268,12 +264,6 @@ export default function QuizClient() {
           background: 'var(--dark)', borderRadius: 100,
           padding: '8px 20px 8px 12px', marginBottom: 32,
         }}>
-          <span style={{
-            width: 32, height: 32, borderRadius: '50%',
-            background: result.color, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontFamily: 'var(--font-cormorant), Georgia, serif',
-            fontSize: 14, fontWeight: 700, color: '#fff',
-          }}>{totalScore}</span>
           <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 300 }}>
             Your score is ready
           </span>
@@ -290,7 +280,7 @@ export default function QuizClient() {
           fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
           lineHeight: 1.75, marginBottom: 36,
         }}>
-          We'll email you your full breakdown — score, strengths, gaps, and what to focus on next.
+          We'll email you your full breakdown with your score, strengths, gaps, and what to focus on next.
         </p>
 
         <form onSubmit={handleEmailSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12, textAlign: 'left' }}>
@@ -325,9 +315,7 @@ export default function QuizClient() {
           </button>
         </form>
 
-        <p style={{ fontSize: 12, color: 'var(--muted-text)', fontWeight: 300, marginTop: 14 }}>
-          No spam. Just your results, once.
-        </p>
+       
       </motion.div>
     </main>
   )
@@ -462,7 +450,7 @@ export default function QuizClient() {
                 </h3>
                 <p style={{ fontSize: 14, fontWeight: 300, color: 'var(--muted-text)' }}>
                   {totalScore <= 22
-                    ? "Book a free 30-min call — we'll walk through exactly where to start."
+                    ? "Book a free 30-min call and we'll walk through exactly where to start."
                     : 'Download our free guide to sharpen what\'s already working.'}
                 </p>
               </div>
@@ -486,7 +474,7 @@ export default function QuizClient() {
                 }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--orange)'; e.currentTarget.style.color = 'var(--orange)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(61,46,30,0.15)'; e.currentTarget.style.color = 'var(--muted-text)' }}
-                >Retake quiz</button>
+                >Redo Audit</button>
               </div>
             </div>
 
