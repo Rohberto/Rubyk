@@ -5,7 +5,7 @@ import { formatPostDate, type Post } from '@/lib/post-types'
 
 export default function BlogCard({ post }: { post: Post }) {
   return (
-    <Link href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
+    <Link href={`/case-studies/${post.slug}`} style={{ textDecoration: 'none' }}>
       <article
         style={{
           background: '#fff', border: '1px solid rgba(61,46,30,0.09)',

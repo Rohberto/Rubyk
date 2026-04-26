@@ -6,7 +6,7 @@ const navLinks = [
   { label: 'Home',        href: '/' },
   { label: 'Services',    href: '/#services' },
   { label: 'About',       href: '/#about' },
-  { label: 'Case Studies',href: '/blog' },
+  { label: 'Case Studies',href: '/case-studies' },
   { label: 'Story Audit',        href: '/quiz' },
   { label: 'Free guide',  href: '/guide', highlight: true },
   { label: 'Contact', href: 'mailto:hello@rubyk.co?subject=Let%27s%20work%20together&body=Hi%20Rubyk%2C%0A%0AI%27d%20love%20to%20chat%20about...', external: true },

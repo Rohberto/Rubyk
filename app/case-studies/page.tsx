@@ -67,14 +67,14 @@ export default async function BlogPage() {
             fontSize:      'clamp(40px, 5vw, 68px)', fontWeight: 600,
             color:         'var(--dark)', letterSpacing: '-2px', lineHeight: 1.06, marginBottom: 16,
           }}>
-            Writing worth reading
+             Stories we've told 
           </h1>
 
           <p style={{
             fontSize: 17, fontWeight: 300, color: 'var(--muted-text)',
             lineHeight: 1.78, maxWidth: 480, paddingBottom: 40, textAlign: 'center', margin: '0 auto',  
           }}>
-           Stories we've told, Every founder's story is different. Here's how we've helped a few of them shine through…
+          Every founder's story is different. Here's how we've helped a few of them shine through…
           </p>
         </div>
 
