@@ -44,6 +44,9 @@ export default function CustomCursor() {
 
   if (!mounted) return null
 
+// Don't show on touch/mobile devices
+if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) return null
+
   return (
     <>
       {/* Trailing ring */}

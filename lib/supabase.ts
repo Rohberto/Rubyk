@@ -7,7 +7,11 @@ if (!url || !anon) {
   console.warn('[Rubyk] Supabase env vars missing. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local')
 }
 
-export const supabase = url && anon ? createClient(url, anon) : null as any
+export const supabase = url && anon ? createClient(url, anon, {
+  global: {
+    fetch: (url, opts) => fetch(url, { ...opts, cache: 'no-store' }),
+  },
+}) : null as any
 
 export function supabaseAdmin() {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''

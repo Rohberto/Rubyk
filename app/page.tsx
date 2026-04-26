@@ -1,3 +1,5 @@
+export const revalidate = 0
+
 import Navbar          from '@/components/Navbar'
 import Hero            from '@/components/Hero'
 import SectorMarquee   from '@/components/SectorMarquee'
@@ -11,6 +13,7 @@ import Footer          from '@/components/Footer'
 import GuideBanner from '@/components/GuideBanner'
 
 export default function Home() {
+
   return (
     <>
       <Navbar />

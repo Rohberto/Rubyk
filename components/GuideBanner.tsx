@@ -11,8 +11,9 @@ export default async function GuideBanner() {
     .eq('id', 1)
     .single()
 
-  const headline    = data?.headline    || fallback.headline
-  const subheadline = data?.subheadline || fallback.subheadline
-
+    console.log(data);
+  const headline    = data?.headline 
+  const subheadline = data?.subheadline
+console.log('[GuideBanner] Loaded config:', { headline, subheadline })
   return <GuideBannerClient headline={headline} subheadline={subheadline} />
 }
