@@ -46,7 +46,7 @@ export default function CaseStudiesClient({ items }: { items: CaseItem[] }) {
           </h2>
         </div>
         <p style={{ fontSize: 16, fontWeight: 300, color: 'rgba(253,250,246,0.48)', lineHeight: 1.8 }}>
-          Every founder's story is different. Here's how we've helped a few of them shine through.
+          Every founder's story is different. Here's how we've helped a few of them shine through...
         </p>
       </div>
 
