@@ -65,9 +65,9 @@ export const testimonials = [
   },
   {
     quote:
-      'Rubyk delivered an excellent job. They are very professional and excellent',
-    name: 'Ayo Falowo',
-    role: 'CEO, FieldWatch',
+      'What stood out most was how well Victory and Andrew worked together. It felt like they each knew exactly what the other needed to make the work better. The deck was really cool, and they captured our vision excellently. The customer service throughout was also great.',
+    name: 'Mary Magdalene',
+    role: 'Founder, Inveo',
     initials: 'AF',
     img: 'https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
