@@ -42,7 +42,7 @@ export default function CaseStudiesClient({ items }: { items: CaseItem[] }) {
             fontSize: 'clamp(30px, 3.5vw, 54px)', fontWeight: 600,
             color: 'var(--cream)', letterSpacing: '-1px', lineHeight: 1.12,
           }}>
-            Stories we've helped tell
+            Stories we've told
           </h2>
         </div>
         <p style={{ fontSize: 16, fontWeight: 300, color: 'rgba(253,250,246,0.48)', lineHeight: 1.8 }}>

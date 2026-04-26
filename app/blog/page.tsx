@@ -74,8 +74,7 @@ export default async function BlogPage() {
             fontSize: 17, fontWeight: 300, color: 'var(--muted-text)',
             lineHeight: 1.78, maxWidth: 480, paddingBottom: 40, textAlign: 'center', margin: '0 auto',  
           }}>
-            Strategy notes, story frameworks, and honest reflections on building
-            businesses in Africa and beyond.
+           Stories we've told, Every founder's story is different. Here's how we've helped a few of them shine through…
           </p>
         </div>
 
