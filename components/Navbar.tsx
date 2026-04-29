@@ -13,7 +13,7 @@ const links: { label: string; href: string; highlight?: boolean }[] = [
   { label: 'Services',    href: '/#services' },
   { label: 'About',       href: '/#about' },
   { label: 'Case Studies',href: '/case-studies' },
-  { label: 'Story Audit',        href: '/quiz' },
+  { label: 'Story Audit',        href: '/audit' },
   { label: 'Free guide',  href: '/guide', highlight: true },
 ]
 
