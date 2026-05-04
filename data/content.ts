@@ -59,7 +59,7 @@ export const testimonials = [
     quote:
       'Victory finds it easy to transform data into compelling business narratives, applying a lot of critical thinking in the process. It’s rare to find that blend of clear storytelling and deep analysis, but Victory brings both.',
     name: 'Didi',
-    role: 'VP Comms, Moniepoint',
+    role: 'VP, Corporate Affairs, Moniepoint',
     initials: '',
     img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&crop=faces&auto=format',
   },
