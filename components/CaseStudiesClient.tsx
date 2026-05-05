@@ -187,7 +187,7 @@ export default function CaseStudiesClient({ items }: { items: CaseItem[] }) {
                         }} />
                         {c.result}
                       </div>
-                      <Link href={`/blog/${c.slug}`} style={{
+                      <Link href={`/case-studies/${c.slug}`} style={{
                         display:        'inline-flex',
                         alignItems:     'center',
                         gap:            6,
