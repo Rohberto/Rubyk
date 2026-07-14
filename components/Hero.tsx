@@ -175,9 +175,9 @@ export default function Hero() {
             flexWrap:     'wrap',
           }}
         >
-          <MagneticButton href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-            Book a free discovery call
-          </MagneticButton>
+         <MagneticButton href="/project">
+  Start a Project
+</MagneticButton>
           <MagneticButton href="#work" variant="ghost">
             See our work →
           </MagneticButton>
