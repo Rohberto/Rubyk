@@ -2,9 +2,10 @@
 
 import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import SectionLabel from './ui/SectionLabel'
 import MagneticButton from './ui/MagneticButton'
-import { services, CALENDLY_URL } from '@/data/content'
+import { services } from '@/data/content'
 
 const STYLES = `
   .services-layout {
@@ -87,16 +88,15 @@ export default function Services() {
               fontSize: 'clamp(30px, 3.5vw, 50px)', fontWeight: 600,
               color: 'var(--dark)', letterSpacing: '-1px', lineHeight: 1.12, marginBottom: 16,
             }}>
-             Turning your ideas into stories that land
+              Turning your ideas into stories that land
             </h2>
             <p style={{
               fontSize: 16, fontWeight: 300, color: 'var(--muted-text)',
               lineHeight: 1.8, marginBottom: 32,
             }}>
               We help founders find their voice and tell the story that gets them heard.
-
             </p>
-            <MagneticButton href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+            <MagneticButton href="/project">
               Not sure where to start? Let's talk →
             </MagneticButton>
           </div>
@@ -104,39 +104,41 @@ export default function Services() {
           {/* Cards */}
           <div ref={cardsRef} className="services-cards">
             {services.map((svc) => (
-              <motion.div
-                key={svc.num}
-                className="svc-card"
-                whileHover={{ y: -5 }}
-                style={{
-                  border: '1px solid rgba(61,46,30,0.10)', borderRadius: 16,
-                  padding: 'clamp(20px, 3vw, 28px)', background: '#fff',
-                  cursor: 'pointer', position: 'relative', overflow: 'hidden',
-                }}
-              >
-                <div style={{
-                  fontFamily: 'var(--font-cormorant), Georgia, serif',
-                  fontSize: 'clamp(36px, 4vw, 44px)', fontWeight: 600,
-                  color: 'var(--orange)', lineHeight: 1, marginBottom: 14, letterSpacing: '-1px',
-                }}>{svc.num}</div>
-                <h3 style={{
-                  fontFamily: 'var(--font-cormorant), Georgia, serif',
-                  fontSize: 'clamp(17px, 2vw, 21px)', fontWeight: 600,
-                  color: 'var(--dark)', marginBottom: 8, lineHeight: 1.3,
-                }}>{svc.title}</h3>
-                <p style={{
-                  fontSize: 13, fontWeight: 300, color: 'var(--muted-text)',
-                  lineHeight: 1.7, marginBottom: 16,
-                }}>{svc.desc}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {svc.tags.map((tag) => (
-                    <span key={tag} style={{
-                      fontSize: 11, color: 'var(--muted-text)', background: '#FAF3EB',
-                      border: '1px solid rgba(61,46,30,0.10)', padding: '3px 9px', borderRadius: 20,
-                    }}>{tag}</span>
-                  ))}
-                </div>
-              </motion.div>
+              <Link key={svc.num} href="/project" style={{ textDecoration: 'none' }}>
+                <motion.div
+                  className="svc-card"
+                  whileHover={{ y: -5 }}
+                  style={{
+                    border: '1px solid rgba(61,46,30,0.10)', borderRadius: 16,
+                    padding: 'clamp(20px, 3vw, 28px)', background: '#fff',
+                    cursor: 'pointer', position: 'relative', overflow: 'hidden',
+                    height: '100%',
+                  }}
+                >
+                  <div style={{
+                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontSize: 'clamp(36px, 4vw, 44px)', fontWeight: 600,
+                    color: 'var(--orange)', lineHeight: 1, marginBottom: 14, letterSpacing: '-1px',
+                  }}>{svc.num}</div>
+                  <h3 style={{
+                    fontFamily: 'var(--font-cormorant), Georgia, serif',
+                    fontSize: 'clamp(17px, 2vw, 21px)', fontWeight: 600,
+                    color: 'var(--dark)', marginBottom: 8, lineHeight: 1.3,
+                  }}>{svc.title}</h3>
+                  <p style={{
+                    fontSize: 13, fontWeight: 300, color: 'var(--muted-text)',
+                    lineHeight: 1.7, marginBottom: 16,
+                  }}>{svc.desc}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                    {svc.tags.map((tag) => (
+                      <span key={tag} style={{
+                        fontSize: 11, color: 'var(--muted-text)', background: '#FAF3EB',
+                        border: '1px solid rgba(61,46,30,0.10)', padding: '3px 9px', borderRadius: 20,
+                      }}>{tag}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
